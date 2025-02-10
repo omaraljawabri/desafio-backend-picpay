@@ -4,6 +4,7 @@ import com.omar.desafio_backend.dtos.request.UserRequestDTO;
 import com.omar.desafio_backend.dtos.response.UserResponseDTO;
 import com.omar.desafio_backend.entities.User;
 import com.omar.desafio_backend.entities.UserType;
+import com.omar.desafio_backend.exceptions.UserNotFoundException;
 import com.omar.desafio_backend.mappers.UserMapper;
 import com.omar.desafio_backend.repositories.UserRepository;
 import jakarta.validation.ValidationException;
@@ -49,5 +50,11 @@ public class UserService {
     public Page<UserResponseDTO> findAll(int page, int quantity) {
         return userRepository.findAll(PageRequest.of(page, quantity))
                 .map(mapper::toUserResponse);
+    }
+
+    public UserResponseDTO findById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found", id)));
+        return mapper.toUserResponse(user);
     }
 }
