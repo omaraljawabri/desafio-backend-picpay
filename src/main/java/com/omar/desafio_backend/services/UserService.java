@@ -8,7 +8,14 @@ import com.omar.desafio_backend.mappers.UserMapper;
 import com.omar.desafio_backend.repositories.UserRepository;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +44,10 @@ public class UserService {
 
         User savedUser = userRepository.save(mapper.toUser(requestDTO));
         return mapper.toUserResponse(savedUser);
+    }
+
+    public Page<UserResponseDTO> findAll(int page, int quantity) {
+        return userRepository.findAll(PageRequest.of(page, quantity))
+                .map(mapper::toUserResponse);
     }
 }
