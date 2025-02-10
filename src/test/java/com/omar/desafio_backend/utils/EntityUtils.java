@@ -1,11 +1,15 @@
 package com.omar.desafio_backend.utils;
 
+import com.omar.desafio_backend.dtos.request.TransferRequestDTO;
 import com.omar.desafio_backend.dtos.request.UserRequestDTO;
+import com.omar.desafio_backend.dtos.response.TransferResponseDTO;
 import com.omar.desafio_backend.dtos.response.UserResponseDTO;
+import com.omar.desafio_backend.entities.Transfer;
 import com.omar.desafio_backend.entities.User;
 import com.omar.desafio_backend.entities.UserType;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class EntityUtils {
 
@@ -37,5 +41,19 @@ public class EntityUtils {
     public static UserResponseDTO createUserMerchantResponseDTO(){
         return new UserResponseDTO(2L,"Lucas", "Smith", null, "12.345.678/0001-95", "lucas@example.com",
                 UserType.MERCHANT, BigDecimal.valueOf(1500));
+    }
+
+    public static Transfer createTransfer(){
+        return Transfer.builder().id(1L).value(BigDecimal.valueOf(1200)).timestamp(LocalDateTime.now())
+                .sender(createCommonUser()).receiver(createMerchantUser()).build();
+    }
+
+    public static TransferRequestDTO createTransferRequestDTO(){
+        return new TransferRequestDTO(BigDecimal.valueOf(1200), 1L, 2L);
+    }
+
+    public static TransferResponseDTO createTransferResponseDTO(){
+        return new TransferResponseDTO(BigDecimal.valueOf(1200), LocalDateTime.now(),
+                createUserCommonResponseDTO(), createUserMerchantResponseDTO());
     }
 }
