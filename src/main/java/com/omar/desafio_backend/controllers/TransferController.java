@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,7 +42,7 @@ public class TransferController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TransferResponseDTO> createTransfer(@RequestBody TransferRequestDTO requestDTO){
+    public ResponseEntity<TransferResponseDTO> createTransfer(@RequestBody @Valid TransferRequestDTO requestDTO){
         return new ResponseEntity<>(transferService.createTransfer(requestDTO), HttpStatus.CREATED);
     }
 }
