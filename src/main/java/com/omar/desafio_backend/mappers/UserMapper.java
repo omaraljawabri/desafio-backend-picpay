@@ -16,11 +16,12 @@ public class UserMapper {
                 .cpf(requestDTO.cpf())
                 .cnpj(requestDTO.cnpj())
                 .type(requestDTO.type())
+                .balance(requestDTO.balance())
                 .build();
     }
 
     public UserResponseDTO toUserResponse(User user){
         return new UserResponseDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getCpf(),
-                user.getCnpj(), user.getEmail(), user.getType());
+                user.getCnpj(), user.getEmail(), user.getType(), user.getBalance());
     }
 }

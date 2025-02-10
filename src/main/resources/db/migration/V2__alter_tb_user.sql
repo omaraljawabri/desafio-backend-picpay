@@ -1,0 +1,2 @@
+ALTER TABLE tb_user
+    ADD balance DECIMAL NOT NULL;
