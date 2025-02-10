@@ -33,9 +33,16 @@ public class UserService {
             throw new ValidationException("Common user should only have cpf");
         }
 
-        if (userRepository.findByEmail(requestDTO.email()).isPresent() || userRepository.findByCpf(requestDTO.cpf()).isPresent()
-        || userRepository.findByCnpj(requestDTO.cnpj()).isPresent()){
-            throw new ValidationException("Email, cpf or cnpj already exists");
+        if (userRepository.findByEmail(requestDTO.email()).isPresent()){
+            throw new ValidationException("email already exists");
+        }
+
+        if (requestDTO.type().equals(UserType.COMMON) && userRepository.findByCpf(requestDTO.cpf()).isPresent()){
+            throw new ValidationException("cpf already exists");
+        }
+
+        if (requestDTO.type().equals(UserType.MERCHANT) && userRepository.findByCnpj(requestDTO.cnpj()).isPresent()){
+            throw new ValidationException("cnpj already exists");
         }
 
         User savedUser = userRepository.save(mapper.toUser(requestDTO));
@@ -51,5 +58,14 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found", id)));
         return mapper.toUserResponse(user);
+    }
+
+    public User findByIdReturnUser(Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User with id: %d not found", id)));
+    }
+
+    public void saveUser(User user){
+        userRepository.save(user);
     }
 }
