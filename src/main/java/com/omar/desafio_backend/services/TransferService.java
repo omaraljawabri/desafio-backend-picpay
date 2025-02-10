@@ -51,17 +51,17 @@ public class TransferService {
         return mapper.toTransferResponse(transfer, payer, payee);
     }
 
-    public boolean validateAuthorization(){
+    private boolean validateAuthorization(){
         ResponseEntity<AuthorizeResponseDTO> authorization = authorizeClient.getAuthorization();
         return authorization.getStatusCode().equals(HttpStatus.OK);
     }
 
-    public boolean sendNotification(){
+    private boolean sendNotification(){
         ResponseEntity<NotificationResponseDTO> notification = notificationClient.sendNotification();
         return notification.getStatusCode().equals(HttpStatus.NO_CONTENT);
     }
 
-    public Transfer saveTransfer(User payer, User payee, TransferRequestDTO transferRequestDTO){
+    private Transfer saveTransfer(User payer, User payee, TransferRequestDTO transferRequestDTO){
         Transfer transfer = Transfer.builder().value(transferRequestDTO.value()).sender(payer).receiver(payee)
                 .build();
         return transferRepository.save(transfer);
