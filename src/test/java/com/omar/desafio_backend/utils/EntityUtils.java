@@ -23,6 +23,11 @@ public class EntityUtils {
                 .balance(BigDecimal.valueOf(1500)).type(UserType.MERCHANT).build();
     }
 
+    public static UserRequestDTO createUserRequestDTO(){
+        return new UserRequestDTO("John", "Adam", "999.999.999-99", null,"john@example.com",
+                UserType.COMMON, BigDecimal.valueOf(1200D));
+    }
+
     public static UserRequestDTO createUserCommonRequestDTO(){
         return new UserRequestDTO("John", "Adam", "999.999.999-99", null,"john@example.com",
                 UserType.COMMON, BigDecimal.valueOf(1200));
