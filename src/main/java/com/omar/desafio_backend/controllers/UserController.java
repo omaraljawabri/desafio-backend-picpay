@@ -48,7 +48,8 @@ public class UserController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
     })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<UserResponseDTO>> findAllUsers(@RequestParam int page, @RequestParam int quantity){
+    public ResponseEntity<Page<UserResponseDTO>> findAllUsers(@RequestParam(name = "page", defaultValue = "0", required = false) int page,
+                                                              @RequestParam(name = "quantity", defaultValue = "10", required = false) int quantity){
         return ResponseEntity.ok().body(userService.findAll(page, quantity));
     }
 
