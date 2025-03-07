@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @FeignClient(
         name = "authorize-client",
-        url = "https://util.devi.tools/api/v2/authorize"
+        url = "${authorize-client.url}"
 )
 public interface AuthorizeClient {
 

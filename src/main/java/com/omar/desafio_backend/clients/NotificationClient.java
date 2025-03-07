@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(
         name = "notification-client",
-        url = "https://util.devi.tools/api/v1/notify"
+        url = "${notify-client.url}"
 )
 public interface NotificationClient {
 
