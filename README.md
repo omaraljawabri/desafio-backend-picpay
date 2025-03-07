@@ -17,13 +17,35 @@ API construída para resolução do desafio backend do picpay proposto no github
 
 A Api foi documentada utilizando Swagger e springdoc-openapi. Caso queira ter acesso a documentação, acesse o link: `http://localhost:8080/swagger-ui/index.html` com a aplicação funcionando.
 
-## 🧪 Testes unitários
+## 🧪 Testes
 
-A aplicação possui testes unitários das classes do tipo Service e Controller, caso queira rodá-los em sua máquina é necessário possuir Maven instalado na versão 3.9.x ou superior!
+A aplicação possui testes unitários das classes do tipo Service e Controller e testes de integração, caso queira rodá-los em sua máquina é necessário possuir Maven instalado na versão 3.9.x ou superior!
 
-### ⚙️ Como rodar
+### 🧪 Testes unitários
+
+Para rodar os testes unitários, siga o passo a passo abaixo:
+
     Abra o terminal no repositório
-    Digite o comando: mvn test
+    Digite o comando: mvn test -Punit-tests
+
+### 🧪 Testes de integração
+
+Para rodar os testes de integração, há um requisito extra necessário: Possuir docker instalado e funcionando.
+
+Caso atenda a todos os requisitos, siga o passo a passo abaixo:
+    
+    Abra o terminal no repositório
+    Digite o comando: mvn test -Pintegration-tests
+
+### 🧪 Todos os testes
+
+Também é possível rodar todos os testes (unitários e de integração) ao  mesmo tempo caso queira. Para isso, é necessário atender tanto aos requisitos dos testes unitários quanto aos requisitos dos testes de integração.
+
+Após atender a todos os requisitos, siga o passo a passo abaixo:
+
+    Abra o terminal no repositório
+    Digite o comando: mvn test -Pall-tests
+
 
 ## 💻 Tecnologias utilizadas
 
@@ -36,5 +58,7 @@ A aplicação possui testes unitários das classes do tipo Service e Controller,
 - JaCoCo
 - JUnit
 - Mockito
+- WireMock
+- Testcontainers
 - Maven
 - PostgreSQL
